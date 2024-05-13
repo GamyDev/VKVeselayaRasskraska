@@ -330,7 +330,8 @@
 
       loading_logo.style.backgroundImage = "url('logo.png')";
 
-      document.body.style.backgroundImage = "url('background.jpg')";
+      // Настраиваем фон полос по бокам
+      document.body.style.backgroundColor = "#FE9900";
 
       loading_bg.style.backgroundImage = "linear-gradient(#2976fa, #6919c6)";
 
@@ -409,6 +410,45 @@
 
       // Вызываем апдейт при входе на страницу и изменений размеров окна браузера
       function Update() {
+        // Фиксируем экран с игрой
+        var lockCanvasText = 'all';
+
+        var desktopStrings = ["pc", "desktop", "computer", "laptop", "windows", "пк", "компьютер", "виндовс", "оба", "все", "all", "полн"];
+        var mobileStrings = ["mobile", "phone", "handheld", "android", "телефон", "мобиль", "андроид", "оба", "все", "all", "полн"];
+        var touchStrings = ["touch", "тач"];
+        var navigatorStrings = ["nav", "навиг", "userAgent"];
+
+        if(touchStrings.some(i => lockCanvasText.includes(i))) {
+          if(isDeviceTouch) {
+            if(mobileStrings.some(i => lockCanvasText.includes(i))) {
+              lock(canvas, 1920 / 1080 );
+            }
+          } else {
+            if(desktopStrings.some(i => lockCanvasText.includes(i))) {
+              lock(canvas, 1920 / 1080 );
+            }
+          }
+        } else if(navigatorStrings.some(i => lockCanvasText.includes(i))) {
+          if(isDeviceNavigator) {
+            if(mobileStrings.some(i => lockCanvasText.includes(i))) {
+              lock(canvas, 1920 / 1080 );
+            }
+          } else {
+            if(desktopStrings.some(i => lockCanvasText.includes(i))) {
+              lock(canvas, 1920 / 1080 );
+            }
+          }
+        } else {
+          if(isDeviceNavigator) {
+            if(mobileStrings.some(i => lockCanvasText.includes(i))) {
+              lock(canvas, 1920 / 1080 );
+            }
+          } else {
+            if(desktopStrings.some(i => lockCanvasText.includes(i))) {
+              lock(canvas, 1920 / 1080 );
+            }
+          }
+        }
 
         console_helper_text.style.fontSize = scaleFactor * 0.7 + 'px';
 
